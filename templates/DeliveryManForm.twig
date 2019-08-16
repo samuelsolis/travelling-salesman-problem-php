@@ -1,0 +1,31 @@
+<form method="POST">
+    <label for="number_of_towns">Number of Towns:</label>
+    <input type="number" value="{{ number_of_towns }}" name="number_of_towns" />
+    <input type="submit" name="reload" value="Reload table" />
+
+    <table>
+    {% for town in towns  %}
+        <tr>
+        {% for distance in town  %}
+            <td>
+            {% if distance matches '/^\\d+$/' %}
+
+                {% if loop.parent.loop.index == loop.index %}
+                    <input type="number" name="{{ loop.parent.loop.index-1 }}{{ loop.index-1 }}town" value="0" readonly>
+                {% else %}
+                    <input type="number" name="{{ loop.parent.loop.index-1 }}{{ loop.index-1 }}town" value="{{ distance }}">
+                {% endif %}
+
+            {% else %}
+                <strong>{{ distance }}</strong>
+            {% endif %}
+            </td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+
+    {% if towns is not empty %}
+        <input name="submit" type="submit" value="Save" />
+    {% endif %}
+</form>
