@@ -6,7 +6,7 @@ require_once('src/DeliveryManForm.class.php');
 require_once ('src/CSVFile.class.php');
 require_once ('src/Backtraking.class.php');
 
-$fileManager = new CSVFile('files/towns.csv');
+$fileManager = new CSVFile('towns.csv');
 
 $DeliveryManForm = new DeliveryManForm($fileManager);
 

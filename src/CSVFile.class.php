@@ -5,12 +5,12 @@
  */
 class CSVFile {
 
-  protected $filename;
+  protected string $filename;
 
   /**
    * File constructor. Open the file connection.
    */
-  public function __construct($filename) {
+  public function __construct(string $filename) {
     $this->filename = $filename;
   }
 
@@ -18,7 +18,8 @@ class CSVFile {
    * @return array
    *   T
    */
-  public function load() {
+  public function load(): array
+  {
     $handle = @fopen($this->filename, "r");
     $map = [];
 

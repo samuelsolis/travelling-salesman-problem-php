@@ -7,10 +7,12 @@ require_once('vendor/autoload.php');
  */
 class Backtraking {
 
-  protected $graph;
-  protected $size;
+  protected array $graph;
+  protected int $size;
 
-  /**
+  private CSVFile $storageController;
+
+    /**
    * Backtraking constructor.
    *
    * @param CSVFile $storageController

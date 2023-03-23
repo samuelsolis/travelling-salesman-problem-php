@@ -1,5 +1,9 @@
 <?php
 
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+
 require_once('CSVFile.class.php');
 require_once('vendor/autoload.php');
 
@@ -8,17 +12,17 @@ require_once('vendor/autoload.php');
  */
 class DeliveryManForm {
 
-  protected $towns_number;
-  protected $towns;
+  protected int $towns_number;
+  protected array $towns;
 
-  protected $storageController;
+  protected ?CSVFile $storageController;
 
   /**
    * DeliveryManForm constructor.
    *
    * @param CSVFile|null $storageController
    */
-  public function __construct($storageController) {
+  public function __construct(?CSVFile $storageController) {
     $this->storageController = $storageController;
     $this->towns = $this->storageController->load();
 
@@ -33,14 +37,14 @@ class DeliveryManForm {
   /**
    * Print the form in HTML.
    *
-   * @throws \Twig\Error\LoaderError
-   * @throws \Twig\Error\RuntimeError
-   * @throws \Twig\Error\SyntaxError
+   * @throws LoaderError
+   * @throws RuntimeError
+   * @throws SyntaxError
    */
   public function render() {
 
-    $loader = new \Twig_Loader_Filesystem(__DIR__.'/../templates');
-    $twig = new \Twig_Environment($loader);
+    $loader = new \Twig\Loader\FilesystemLoader(__DIR__.'/templates');
+    $twig = new \Twig\Environment($loader);
 
     print $twig->render('DeliveryManForm.twig', [
       'towns' => $this->towns,
